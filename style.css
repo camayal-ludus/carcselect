@@ -23,11 +23,11 @@ svg {
 }
 
 
-.hoverized:hover{
+/* .hoverized:hover{
   color: rgb(114, 114, 114);
  text-decoration: none;
   cursor: pointer;
-}
+} */
 
 .lbl-toggle {
     display: block;
