@@ -63,21 +63,25 @@ function updateNumber(n){
     if (numberEl.innerHTML >= Object.keys(expansions).length){plusEl.style.visibility = "hidden";} else {plusEl.style.visibility = "visible";} //disable minus
     //TODO mejorar este if
     if (n >= 13){
-        sizeImg = "20%"
+        sizeImg = "20"
+    } else if (n >= 10){
+        sizeImg = "26"
+    } else if (n >= 7){
+        sizeImg = "33"
     } else if (n >= 5){
-        sizeImg = "30%"
+        sizeImg = "35"
     } else if (n >= 3){
-        sizeImg = "45%"
+        sizeImg = "45"
     }else if (n == 2){
-        sizeImg = "55%"
+        sizeImg = "55"
     }else if (n == 1){
-        sizeImg = "90%"
+        sizeImg = "90"
     }
     //put the result
     document.getElementById("containerImg").innerHTML = "";
     var tempArray = random(n);
     for (var expansion in tempArray){
-        document.getElementById("containerImg").innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" width="'+sizeImg+'" height="'+sizeImg+'"'+ expansions[tempArray[expansion]].img +'</svg>'
+        document.getElementById("containerImg").innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" width="'+sizeImg+'%" height="'+sizeImg+'%"'+ expansions[tempArray[expansion]].img +'</svg>'
     }
 }
 
