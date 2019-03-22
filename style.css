@@ -33,12 +33,12 @@ svg {
     display: block;
     margin: auto;
     width: 60%;
-    font-size: 1.8rem;
-    padding: 1rem;
+    font-size: 4vh;
+    padding: 2vh 2vw;
     color: rgb(0, 0, 0);
     background: rgb(255, 255, 255);
     cursor: pointer;
-    border-radius: 0.5rem;
+    border-radius: 2vw;
     /* transition: all 0.25s ease-out; */
   }
   
@@ -69,12 +69,12 @@ svg {
 
 
   #controler {
-    font-size: 4rem;
+    font-size: 10vh;
   }
 
   #number {
     display: inline-block;
-    width: 3rem;
+    width: 15vw;
     font-weight: bold;
   }
 
@@ -103,7 +103,7 @@ svg {
 
 /* The Close Button */
 .close {
-  font-size: 3rem;
+  font-size: 8vh;
   font-weight: bold;
   position: fixed;
   right: 0;
@@ -115,7 +115,7 @@ svg {
   position: fixed;
   right: 0;
   bottom: 0;
-  font-size: 4rem;
+  font-size: 10vh;
   font-weight: bold;
   /* border: 3px solid #73AD21; */
 }

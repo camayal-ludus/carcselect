@@ -78,9 +78,6 @@ function updateNumber(n){
     var tempArray = random(n);
     for (var expansion in tempArray){
         document.getElementById("containerImg").innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" width="'+sizeImg+'" height="'+sizeImg+'"'+ expansions[tempArray[expansion]].img +'</svg>'
-        
-
-        
     }
 }
 
