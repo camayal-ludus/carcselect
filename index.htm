@@ -43,7 +43,7 @@
       .lbl-toggle {
         display: block;
         margin: auto;
-        width: 60%;
+        width: 70%;
         font-size: 4vh;
         padding: 2vh 2vw;
         color: rgb(0, 0, 0);
@@ -185,7 +185,8 @@
     </script>
     
     <script>
-    // Define an object with some information about the expansions
+      screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+      // Define an object with some information about the expansions
       var expansions = {
           // farmer: {name:"Farmers", type:"Minor"},
           innsandcathedrals: {name:"Inns and Cathedrals", img:img_innsandcathedrals, type:"Major", 
