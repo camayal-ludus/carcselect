@@ -107,7 +107,7 @@
 
       /* The Close Button */
       .close {
-        font-size: 8vh;
+        font-size: 10vh;
         font-weight: bold;
         position: fixed;
         right: 0;
@@ -119,7 +119,7 @@
         position: fixed;
         right: 0;
         bottom: 0;
-        font-size: 10vh;
+        font-size: 8vh;
         font-weight: bold;
         /* border: 3px solid #73AD21; */
       }
@@ -164,7 +164,7 @@
 
     <div id="myModal" class="modal">
       <div class="modal-content">
-          <span class="close hoverized">&#x2715;</span>
+          <span class="close hoverized">&times;</span>
           <div id="extentionList"></div>
       </div>
     </div>
@@ -217,14 +217,6 @@
       numberEl = document.getElementById("number")
       minusEl = document.getElementById("minus")
       plusEl = document.getElementById("plus")
-
-      //Check what is the previous number saved
-      if (!localStorage.getItem("number")){
-          localStorage.setItem("number", 1)
-          updateNumber(localStorage.getItem("number"))
-      } else {
-          updateNumber(localStorage.getItem("number"))
-      }
 
       //Set clic response for minus button
       document.getElementById("minus").addEventListener("click", function(){
@@ -317,6 +309,10 @@
           // console.log(el.name + ": " + el.checked)
       }
 
+
+
+
+
       function random(n){
           // create an array
           ownedExpansions = [];
@@ -358,6 +354,30 @@
         modal.style.display = "none";
       }
 
+      //Select all function 
+      function selectAll(){
+        for (var expansion in expansions){
+          localStorage.setItem(expansion, "true");
+          document.getElementById(expansion).checked = true;
+        }
+      }
+
+      //Select none
+      function selectNone(){
+        for (var expansion in expansions){
+          localStorage.setItem(expansion, "false");
+          document.getElementById(expansion).checked = false;
+        }
+      }
+
+      //Check what is the previous number saved
+      if (!localStorage.getItem("number")){
+          localStorage.setItem("number", 1)
+          selectAll()
+          updateNumber(localStorage.getItem("number"))
+      } else {
+          updateNumber(localStorage.getItem("number"))
+      }
     </script>
   </body>
 </html>
