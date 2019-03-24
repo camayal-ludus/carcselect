@@ -40,7 +40,8 @@
         vertical-align:text-top;
       }
 
-      .lbl-toggle {
+      .lbl-toggle, #myInput{
+        font-family: carcaFont;
         display: block;
         margin: auto;
         width: 70%;
@@ -52,7 +53,17 @@
         border-radius: 2vw;
         /* transition: all 0.25s ease-out; */
       }
-                
+
+
+      #buttonssel{
+        position: fixed;
+        top: 0;
+        right: 0;
+        font-size: 7vh;
+        width: 7vh;
+      }
+
+                   
       .toggle:checked + .lbl-toggle {
         background: rgb(255, 255, 255);
         border-left-style: solid;
@@ -165,6 +176,11 @@
     <div id="myModal" class="modal">
       <div class="modal-content">
           <span class="close hoverized">&times;</span>
+          <input type="text" id="myInput" onkeyup="search()" placeholder="&#8981; Search... (e.g. Major)">
+          <div id="buttonssel">
+            <span id="selectAll" onclick="selectAllorNotfromUl(true)">&#x2611;</span>
+            <span id="selectNone" onclick="selectAllorNotfromUl(false)">&#x2610;</span>
+          </div>
           <div id="extentionList"></div>
       </div>
     </div>
@@ -189,29 +205,29 @@
       // Define an object with some information about the expansions
       var expansions = {
           // farmer: {name:"Farmers", type:"Minor"},
-          innsandcathedrals: {name:"Inns and Cathedrals", img:img_innsandcathedrals, type:"Major", 
+          innsandcathedrals: {name:"Inns and Cathedrals", img:img_innsandcathedrals, ak:"large meeple", type:"Major", 
               parts: {
                   bigmepple: {name:"The Big Mepple", type:"Sub"},
                   inns: {name:"Inns", type:"Sub"},
                   cathedrals: {name:"Cathedrals", type:"Sub"}
               }
           },
-          tradersandbuilders:{name:"Traders and Builders", img:img_tradersandbuilders, type:"Major",
+          tradersandbuilders:{name:"Traders and Builders", img:img_tradersandbuilders, ak:"pig goods", type:"Major",
               parts: {
                   pig: {name:"The Pig", type:"Sub"},
                   builder: {name:"The Builder", type:"Sub"},
                   goods: {name:"Goods", type:"Sub"}
               }
           },
-          cropcircles: {name:"Crop Circles", img:img_cropcircles, type:"Minor"},
-          ferries: {name:"The Ferries", img:img_ferries, type:"Minor"},
-          abbot: {name:"The Abbot", img:img_abbot, type:"Minor"},
-          river: {name:"The River", img:img_river, type:"Minor"},
-          flier: {name:"The Flier", img:img_flier, type:"Minor"},
-          goldmines: {name:"The Goldmines", img:img_goldmines, type:"Minor"},
-          mageandwitch: {name:"Mage and Witch", img:img_mageandwitch, type:"Minor"},
-          messages: {name:"The Messages", img:img_messages, type:"Minor"},
-          robbers: {name:"The Robbers", img:img_robbers, type:"Minor"}
+          cropcircles: {name:"Crop Circles", img:img_cropcircles, ak:"", type:"Minor"},
+          ferries: {name:"The Ferries", img:img_ferries, ak:"", type:"Minor"},
+          abbot: {name:"The Abbot", img:img_abbot, ak:"", type:"Minor"},
+          river: {name:"The River", img:img_river, ak:"", type:"Minor"},
+          flier: {name:"The Flier", img:img_flier, ak:"flying machines", type:"Minor"},
+          goldmines: {name:"The Goldmines", img:img_goldmines, ak:"", type:"Minor"},
+          mageandwitch: {name:"Mage and Witch", img:img_mageandwitch, ak:"", type:"Minor"},
+          messages: {name:"The Messages", img:img_messages, ak:"Messengers Dispatches", type:"Minor"},
+          robbers: {name:"The Robbers", img:img_robbers, ak:"", type:"Minor"}
       }
 
       numberEl = document.getElementById("number")
@@ -266,6 +282,7 @@
       //// CREATE LIST OF EXTENSIONS
       //put in ul a new ul element and append to the DIV preexistent in the doc
       var ul = document.createElement('ul');
+      ul.id = "list"
       document.getElementById('extentionList').appendChild(ul);
 
       // do a for for each expansion in the object expansion
@@ -273,6 +290,9 @@
 
           // create a li object for each expansion and add it to ul element (in li to future sort and search function)
           var li = document.createElement('li');
+          li.setAttribute('data-type', expansions[expansion].type);
+          li.setAttribute('data-ak', expansions[expansion].ak);
+          // li.setAttribute('data-in', expansions[expansion].in);
           ul.appendChild(li);
 
           // create the checkbox with the name and id as the expansion, add a onclic function save and retrive localStorage to see if is previously saved
@@ -291,8 +311,7 @@
           sizeImg = "1em";
           image = '<svg class="minisvg" xmlns="http://www.w3.org/2000/svg" width='+sizeImg+' height='+sizeImg +' '+ expansions[expansion].img +'</svg>'
           // label.appendChild(document.createTextNode(expansions[expansion].name));
-          label.innerHTML = image + " " + expansions[expansion].name;
-          
+          label.innerHTML = image + " " + expansions[expansion].name;   
 
 
 
@@ -345,6 +364,8 @@
 
       // When the user clicks on the button, open the modal
       btn.onclick = function() {
+        document.getElementById("myInput").value = "";
+        search();
         modal.style.display = "block";
       }
 
@@ -354,7 +375,28 @@
         modal.style.display = "none";
       }
 
-      //Select all function 
+
+      function search(){
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('myInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("list");
+        li = ul.getElementsByTagName('li');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+          txtValue = li[i].dataset.ak + li[i].dataset.type + li[i].textContent + li[i].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+          } else {
+            li[i].style.display = "none";
+          }
+        }
+      }
+
+
+      //Select all function from the object
       function selectAll(){
         for (var expansion in expansions){
           localStorage.setItem(expansion, "true");
@@ -362,13 +404,33 @@
         }
       }
 
-      //Select none
+      //Select none (not used here)
       function selectNone(){
         for (var expansion in expansions){
           localStorage.setItem(expansion, "false");
           document.getElementById(expansion).checked = false;
         }
       }
+
+
+
+
+      //select all or none from displayed list
+      function selectAllorNotfromUl(select){
+        var el = document.getElementsByTagName('li');
+
+        for(var i=0;i<el.length;i++) {
+          if(el[i].style.display !== "none") {
+              // console.log(el[i].childNodes[0].checked)
+              child = el[i].childNodes[0]
+              child.checked = select;
+              localStorage.setItem(child.name, child.checked);
+          }
+        }
+      }
+
+      
+
 
       //Check what is the previous number saved
       if (!localStorage.getItem("number")){
