@@ -95,6 +95,10 @@
         font-weight: bold;
       }
 
+      #warning {
+        font-weight: bold;
+        font-size: 13vw;
+      }
 
       /* The Modal (background) */
       .modal {
@@ -244,11 +248,11 @@
           baths: {name:"The Barber-Surgeons", img:img_baths, ak:"baths", type:"Minor Mini"},
           castlesGermany: {name:"Castles in Germany", img:img_castlesGermany, ak:"", type:"Minor Mini Double"},
           fruits: {name:"The Fruit-Bearing Trees", img:img_fruits, ak:"", type:"Minor Mini"},
-          labyrint: {name:"The labyrint", img:img_labyrint, ak:"", type:"Minor Mini Single"},
+          labyrint: {name:"The Labyrint", img:img_labyrint, ak:"", type:"Minor Mini Single"},
           markets: {name:"The Markets of Leipzig", img:img_markets, ak:"lipsia", type:"Minor Mini Double Start"},
           monasteries: {name:"Monasteries in Germany", img:img_monasteries, ak:"", type:"Minor Mini"},
           watchtowers: {name:"The Watchtowers", img:img_watchtowers, ak:"", type:"Minor Mini"},
-          festival15: {name:"The Festival", img:img_festival15, ak:"aniversario 15th", type:"Minor Mini"}
+          festival15: {name:"The Festival", img:img_festival15, ak:"anniversary 15th", type:"Minor Mini"}
 
           
       }
@@ -303,15 +307,24 @@
       }
 
 
+      //Select and include svg in the html
       function drawImage(n){
-        //put the result
+        //empty image containesr
         document.getElementById("containerImg").innerHTML = "";
-          var tempArray = random(n);
-          for (var expansion in tempArray){
-              document.getElementById("containerImg").innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" width="'+sizeImg+'%" height="'+sizeImg+'%"'+ expansions[tempArray[expansion]].img +'</svg>'
-          }
+        //check if selected expansions is <= 0 and show warning
+        numberExpansionsSelected = getMaxnumberExpansionsSelected();
+        if (numberExpansionsSelected <= 0){
+          document.getElementById("containerImg").innerHTML += '<span id="warning">Select some extension!</span>'
+        }else{
+          //put the result
+            var tempArray = random(n);
+            for (var expansion in tempArray){
+                document.getElementById("containerImg").innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" width="'+sizeImg+'%" height="'+sizeImg+'%"'+ expansions[tempArray[expansion]].img +'</svg>'
+        }}
       }
 
+
+      //simulate random selection
       function rollingImage(){
         tempnum = localStorage.getItem("number");
         // repeat with the interval of n seconds
@@ -319,6 +332,8 @@
         // after n seconds stop
         setTimeout(() => clearInterval(timerId), 1000);
       }
+
+
 
       //// CREATE LIST OF EXTENSIONS
       //put in ul a new ul element and append to the DIV preexistent in the doc
@@ -370,7 +385,15 @@
       }
 
 
-
+      function getMaxnumberExpansionsSelected(){
+        count = 0;
+        for (var expansion in expansions){
+              if (localStorage.getItem(expansion) == 'true'){
+                  count++
+              }
+          }
+        return count;
+      }
 
 
       function random(n){
@@ -413,6 +436,18 @@
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
         //drawImage(localStorage.getItem("number"));
+        numberExpansionsSelected = getMaxnumberExpansionsSelected();
+        //modify the number in the main page if the number of selected expansions is less
+        if (localStorage.getItem("number") > numberExpansionsSelected){
+          //if zero expansions are selected, force 1 as number
+          if (numberExpansionsSelected <= 0){
+            updateNumber(1)
+          }
+          else{
+            updateNumber(numberExpansionsSelected)
+          }
+        }
+
         rollingImage();
         modal.style.display = "none";
       }
