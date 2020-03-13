@@ -16,7 +16,10 @@
     <style>
 
 
-      
+      html{
+        height: 100vh;
+      }
+
       body {
         font-family: carcaFont;
         -webkit-touch-callout: none; /* iOS Safari */
@@ -54,8 +57,8 @@
         font-family: carcaFont;
         display: block;
         margin: auto;
-        width: 70%;
-        font-size: 6vw;
+        width: 70vw;
+        font-size: 7vw;
         padding: 3vw 2vw;
         color: rgb(0, 0, 0);
         background: rgb(255, 255, 255);
@@ -107,7 +110,7 @@
 
       #warning {
         font-weight: bold;
-        font-size: 13vw;
+        font-size: 15vw;
       }
 
       /* The Modal (background) */
@@ -155,7 +158,10 @@
       }
 
       #containerImg {
+        top:10vh;
+        max-height: 80vh;
         height: 80vh;
+        /* height: auto; */
         width: 95vw;
         position: relative;
         /* border: 3px solid green;  */
@@ -185,7 +191,7 @@
 
   <body ondragstart="return false;" oncontextmenu="return false;">
     
-    <div id="containerImg" class="content"></div>
+    <div id="containerImg"></div>
 
     <footer>
       <div id="controler">
@@ -265,7 +271,10 @@
           tower: {name:"The Tower", img:img_tower, ak:"", type:"Major"},
           tollkeepers: {name:"The Tollkeepers", img:img_tollkeepers, ak:"customs", type:"Minor Mini"},
           mayor: {name:"Abbey and The Mayor", img:img_mayor, ak:"wagon", type:"Major"}
-
+          // count
+          // bridges
+          // sheeps
+          // circus
 
       }
 
@@ -293,7 +302,7 @@
 
 
       //change element with number, hide plus and minus buttons if needed and update in the localstorage the current number
-      function updateNumber(n){
+      function updateNumber(n, roll=true){
           numberEl.innerHTML = n;
           localStorage.setItem("number", n)
           if (numberEl.innerHTML <= 1){minusEl.style.visibility = "hidden";} else {minusEl.style.visibility = "visible";} //disable minus
@@ -316,10 +325,10 @@
           // }
           // sizeImg = 81.936 * Math.pow(n, -0.469);
           // sizeImg = 90/(Math.sqrt(n));
-           sizeImg =   document.documentElement.clientWidth * 0.95 / Math.sqrt(Math.ceil(Math.sqrt(n)) * Math.round(Math.sqrt(n)));
-            // sizeImg = optimizeBoxArea(n, document.getElementById("containerImg").offsetWidth, document.getElementById("containerImg").offsetHeight)
+          //  sizeImg =   document.documentElement.clientWidth * 0.95 / Math.sqrt(Math.ceil(Math.sqrt(n)) * Math.round(Math.sqrt(n)));
+            sizeImg = optimizeBoxArea(n, document.getElementById("containerImg").offsetWidth, document.getElementById("containerImg").offsetHeight)
 
-          drawImage(n);
+          drawImage(n, roll);
       }
 
 
@@ -329,18 +338,18 @@
         ncolumns = Math.ceil(Math.sqrt(n)) //get max number of columns
         nelements = nrows * ncolumns //get max number of elements
         areaBox = side1 * side2
-        sizeElement = 0
+        sizeElement = 0.1
         areaTotalElements = Math.pow(sizeElement,2) * n
-        while (areaBox * 0.6 > areaTotalElements){
+        while (areaBox * 0.5 > areaTotalElements){
           areaTotalElements = Math.pow(sizeElement++,2) * n
         }
-        return sizeElement
+        return (sizeElement / window.innerWidth) * 100
       }
 
       
 
       //Select and include svg in the html
-      function drawImage(n){
+      function drawImage(n, roll){
         //empty image containesr
         document.getElementById("containerImg").innerHTML = "";
         //check if selected expansions is <= 0 and show warning
@@ -351,7 +360,7 @@
           //put the result
             var tempArray = random(n);
             for (var expansion in tempArray){
-                document.getElementById("containerImg").innerHTML += '<svg class="svg" xmlns="http://www.w3.org/2000/svg" width="'+sizeImg+'px" height="'+sizeImg+'px"'+ expansions[tempArray[expansion]].img +'</svg>'
+                document.getElementById("containerImg").innerHTML += '<svg class="svg" xmlns="http://www.w3.org/2000/svg" width="'+sizeImg+'vw" height="'+sizeImg+'vw"'+ expansions[tempArray[expansion]].img +'</svg>'
                 // document.getElementById("containerImg").innerHTML += '<svg class="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"'+ expansions[tempArray[expansion]].img +'</svg>'
             }
         }
@@ -413,7 +422,7 @@
           var label = document.createElement('label')
           label.htmlFor = expansion;
           label.className = "lbl-toggle hoverized";
-          sizeImg = "1em";
+          sizeImg = "7vw";
           image = '<svg class="minisvg" xmlns="http://www.w3.org/2000/svg" width='+sizeImg+' height='+sizeImg +' '+ expansions[expansion].img +'</svg>'
           // label.appendChild(document.createTextNode(expansions[expansion].name));
           label.innerHTML = image + " " + expansions[expansion].name;   
@@ -568,6 +577,20 @@
           updateNumber(localStorage.getItem("number"))
           rollingImage()
       }
+
+
+
+      // //Resize
+      // window.addEventListener("resize", function(){
+      //   // updateNumber(localStorage.getItem("number"), roll=false)
+      //   var svgs = document.getElementsByClassName("svg")
+      //   var sizeImg = optimizeBoxArea(n, document.getElementById("containerImg").offsetWidth, document.getElementById("containerImg").offsetHeight)
+
+      //   for (var svgUniq in svgs){
+      //     svgUniq.setAttribute("height", sizeImg + "vw");
+      //     svgUniq.setAttribute("width", sizeImg + "vw");
+      //   }
+      // });
     </script>
   </body>
 </html>
