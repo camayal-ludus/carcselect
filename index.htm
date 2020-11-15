@@ -17,13 +17,16 @@
 
     <style>
       html{
-        
-	 overscroll-behavior-y: contain;
+        overflow: hidden;
+	      overscroll-behavior-y: contain;
+        height: 100%;
       }
 
      
 
       body {
+        height: 100%;
+        position: fixed;
         font-family: carcaFont;
         -webkit-touch-callout: none; /* iOS Safari */
         -webkit-user-select: none; /* Safari */
@@ -32,7 +35,9 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
         text-align: center;  
-	 overscroll-behavior-y: contain;
+	      overscroll-behavior-y: contain;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
                 
       }
 
@@ -225,7 +230,7 @@
       }
 
       .svgLabels{
-        font-size: 0.4vw;
+        font-size: 0.6vw;
         dominant-baseline: middle;
         /* dominant-baseline: hanging;  */
         text-anchor: middle;
@@ -254,9 +259,9 @@
 
   <body ondragstart="return false;" oncontextmenu="return false;">
 <div id="rotateAlert">
-    <span class="warning">Rotate your device  </span>
+    <span class="warning">Rotate your device
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.229 13.229" height="10vw" width="10vw" xmlns:v="https://vecta.io/nano"><defs><marker id="A" refX="0" refY="0" orient="auto" overflow="visible"><path transform="matrix(-1.1 0 0 -1.1 -1.1 0)" d="M8.72 4.034L-2.207.016 8.72-4.002c-1.745 2.372-1.735 5.617 0 8.035z" fill="#000" fill-opacity="1" fill-rule="evenodd" stroke="#000" stroke-width=".625" stroke-opacity="1" class="C"/></marker></defs><g transform="matrix(.336101 0 0 .336101 -9.485536 -24.77997)" stroke="#000" class="B"><g fill="#fff" class="C"><rect ry="1.737" y="75.038" x="28.68" height="31.084" width="18.567" fill="#00000d" class="D"/><rect ry="1.623" y="76.064" x="29.273" height="29.033" width="17.38" class="E"/><g transform="rotate(90 38.816 103.347)"><rect ry="1.737" y="75.038" x="28.68" height="31.084" width="18.567" fill="#00000d" class="D"/><rect ry="1.623" y="76.064" x="29.273" height="29.033" width="17.38" class="E"/></g></g><path d="M50.046 80.512c3.052 0 6.103 0 7.628 1.614S59.2 86.97 59.2 90.2" fill="none" stroke-width=".265" stroke-miterlimit="3.5" marker-end="url(#A)"/></g></svg></div>
-
+  </span>
 <div id="bodycontainer">
     <div id="containerImg"></div>
 
@@ -327,7 +332,7 @@
           // farmer: {name:"Farmers", type:"Minor"},
           innsandcathedrals: {name:"Inns and Cathedrals", img:img_innsandcathedrals, ak:"large meeple", type:"Major Meeple Tile", wica:"https://wikicarpedia.com/index.php/Inns_and_Cathedrals"},
           tradersandbuilders:{name:"Traders and Builders", img:img_tradersandbuilders, ak:"pig goods", type:"Major Meeple Feature Tile", wica:"https://wikicarpedia.com/index.php/Traders_and_Builders"},
-          dragon: {name:"The Princess and The Dragon", img:img_dragon, ak:"fairy", type:"Major Meeple Tile", wica:"https://wikicarpedia.com/index.php/The_Princess_and_The_Dragon"},
+          dragon: {name:"The Princess & The Dragon", img:img_dragon, ak:"fairy", type:"Major Meeple Tile", wica:"https://wikicarpedia.com/index.php/The_Princess_and_The_Dragon"},
           tower: {name:"The Tower", img:img_tower, ak:"", type:"Major Structure Tile", wica:"https://wikicarpedia.com/index.php/The_Tower"},
           mayor: {name:"Abbey and The Mayor", img:img_mayor, ak:"wagon", type:"Major Meeple Structure Tile", wica:"https://wikicarpedia.com/index.php/Abbey_and_the_Mayor"},
           cropcircles: {name:"Crop Circles", img:img_cropcircles, ak:"", type:"Minor Mini Tile", wica:"https://wikicarpedia.com/index.php/Crop_Circles"},
@@ -336,7 +341,7 @@
           river: {name:"The River", img:img_river, ak:"", type:"Minor Mini Tile", wica:"https://wikicarpedia.com/index.php/River"},
           flier: {name:"The Flier", img:img_flier, ak:"flying machines", type:"Minor Mini Dice Tile", wica:"https://wikicarpedia.com/index.php/The_Flier"},
           goldmines: {name:"The Goldmines", img:img_goldmines, ak:"", type:"Minor Mini Feature Tile", wica:"https://wikicarpedia.com/index.php/The_Goldmines"},
-          mageandwitch: {name:"Mage and Witch", img:img_mageandwitch, ak:"", type:"Minor Mini Meeple Tile", wica:"https://wikicarpedia.com/index.php/Mage_and_Witch"},
+          mageandwitch: {name:"Mage & Witch", img:img_mageandwitch, ak:"", type:"Minor Mini Meeple Tile", wica:"https://wikicarpedia.com/index.php/Mage_and_Witch"},
           messages: {name:"The Messages", img:img_messages, ak:"Messengers Dispatches", type:"Minor Mini Feature Meeple Tile", wica:"https://wikicarpedia.com/index.php/The_Messages"},
           robbers: {name:"The Robbers", img:img_robbers, ak:"", type:"Minor Mini Meeple Tile", wica:"https://wikicarpedia.com/index.php/The_Robbers"},
           baths: {name:"The Barber-Surgeons", img:img_baths, ak:"baths", type:"Minor Mini Tile", wica:"https://wikicarpedia.com/index.php/The_Barber-Surgeons"},
@@ -350,8 +355,8 @@
           phantom: {name:"The Phantom", img:img_phantom, ak:"", type: "Minor Mini Meeple", wica:"https://wikicarpedia.com/index.php/The_Phantom_(1st_edition)"},
           tollkeepers: {name:"The Tollkeepers", img:img_tollkeepers, ak:"customs", type:"Minor Mini Feature Tile", wica:"https://wikicarpedia.com/index.php/The_Tollkeepers"},
           cathedralsGermany: {name:"Cathedrals in Germany", img:img_cathedralsGermany, ak:"", type:"Minor Mini Tile", wica:"https://wikicarpedia.com/index.php/Cathedrals_in_Germany"},
-          count: {name:"Count, King and Robber", img:img_count, ak:"carcassonne", type:"Major Start Tile Meeple Feature", wica:"https://wikicarpedia.com/index.php/Count,_King_and_Robber"},
-          bridges: {name:"Bridges, Castles and Bazaars", img:img_bridges, ak:"", type:"Major Structure Feature Tile", wica:"https://wikicarpedia.com/index.php/Bridges,_Castles_and_Bazaars"},
+          count: {name:"Count, King & Robber", img:img_count, ak:"carcassonne", type:"Major Start Tile Meeple Feature", wica:"https://wikicarpedia.com/index.php/Count,_King_and_Robber"},
+          bridges: {name:"Bridges, Castles & Bazaars", img:img_bridges, ak:"", type:"Major Structure Feature Tile", wica:"https://wikicarpedia.com/index.php/Bridges,_Castles_and_Bazaars"},
           sheep: {name:"Hills & Sheep", img:img_sheep, ak:"", type:"Major Feature Meeple Tile", wica:"https://wikicarpedia.com/index.php/Hills_%26_Sheep"},
           circus: {name:"Under the Big Top", img:img_circus, ak:"circus acrobats", type:"Major Feature Meeple Tile", wica:"https://wikicarpedia.com/index.php/Under_the_Big_Top"},
           half1: {name:"Halflings 1", img:img_half1, ak:"", type:"Minor Mini Triangular Tile", wica:"https://wikicarpedia.com/index.php/Halflings"},
@@ -834,7 +839,7 @@
         const ratio_vertical = (touchendY - touchstartY) / height;
 
       //swipe right
-        if (ratio_horizontal > ratio_vertical && ratio_horizontal > 0.25) {
+        if (ratio_horizontal > ratio_vertical && ratio_horizontal > 0.15) {
           if (isModalOpened){
             clossmodal_function()
           }else{
@@ -843,7 +848,7 @@
         }
 
       //swipe down
-        if (ratio_vertical > ratio_horizontal && ratio_vertical > 0.25) {
+        if (ratio_vertical > ratio_horizontal && ratio_vertical > 0.15) {
                   var x = document.getElementsByClassName("svgLabels");
                   for (var i = 0; i < x.length; i++) {
                     // x[i].style.visibility = "visible"
@@ -852,14 +857,14 @@
         }
 
         //swipe left
-        if (ratio_horizontal < ratio_vertical && ratio_horizontal < -0.25) {
+        if (ratio_horizontal < ratio_vertical && ratio_horizontal < -0.15) {
           if (!isModalOpened){
             openmodal_function()
           }
         }
 
         //swipe up
-        if (ratio_vertical < ratio_horizontal && ratio_vertical < -0.25) {
+        if (ratio_vertical < ratio_horizontal && ratio_vertical < -0.15) {
           var x = document.getElementsByClassName("svgLabels");
                   for (var i = 0; i < x.length; i++) {
                     // x[i].style.visibility = "hidden"
