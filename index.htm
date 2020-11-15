@@ -153,7 +153,7 @@
         left: 0;
         top: 0;
         width: 100%; /* Full width */
-        height: 100vh; 
+        height: 99vh; 
         background-color: rgb(255, 255, 255); /* Fallback color */
         overscroll-behavior-y: contain;
         overflow-y: auto;
@@ -162,7 +162,7 @@
 
       /* Modal Content/Box */
       .modal-content {
-        height: 100vh;
+        /* height: 100vh; */
         background-color: #ffffff;
         /* margin: 15% auto; 15% from the top and centered */
         padding: 0;
@@ -841,7 +841,7 @@
         const ratio_vertical = (touchendY - touchstartY) / height;
 
       //swipe right
-        if (ratio_horizontal > ratio_vertical && ratio_horizontal > 0.15) {
+        if (ratio_horizontal > ratio_vertical && ratio_horizontal > 0.25) {
           if (isModalOpened){
             clossmodal_function()
           }else{
@@ -859,7 +859,7 @@
         }
 
         //swipe left
-        if (ratio_horizontal < ratio_vertical && ratio_horizontal < -0.15) {
+        if (ratio_horizontal < ratio_vertical && ratio_horizontal < -0.25) {
           if (!isModalOpened){
             openmodal_function()
           }
